@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gerenciar usuários — Cadê?</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../area-interna.css">
+  <link rel="stylesheet" href="./administrar.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="../supabase-config.js" defer></script>
+  <script src="../supabase-cliente.js" defer></script>
+  <script src="./api-supabase.js" defer></script>
+  <script src="./usuarios.js" defer></script>
+  <link rel="icon" type="image/svg+xml" href="../icone-cade.svg">
+</head>
+<body class="pagina-administracao">
+  <a class="pular-conteudo" href="#conteudo-usuarios">Pular para o conteúdo</a>
+  <header class="cabecalho-gerencial">
+  <a
+    class="marca-gerencial"
+    href="../index-supabase.html"
+    aria-label="Cadê? — Catálogo de soluções digitais da SPU, página inicial"
+  >
+    <span class="marca-gerencial-textos">
+      <strong>Cadê?</strong>
+      <small>Catálogo de soluções digitais da SPU</small>
+    </span>
+
+    <span class="marca-gerencial-grafico" aria-hidden="true">
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+    </span>
+  </a>
+</header>
+  <main id="conteudo-usuarios" class="administracao">
+    <section class="apresentacao-admin">
+      <div><h2>Gerenciar usuários</h2><p>Autorize e organize os acessos à área gerencial.</p></div>
+      <nav class="acoes-admin" aria-label="Ações">
+        <a class="botao-voltar" href="./administrar.html">Voltar às soluções</a>
+        <button type="button" id="atualizar-usuarios">Atualizar lista</button>
+        <button type="button" id="novo-usuario" class="botao-principal">Novo usuário</button>
+        <button type="button" id="sair-usuarios">Sair</button>
+      </nav>
+    </section>
+    <p id="identificacao-usuario" class="orientacao"></p>
+    <div class="aviso-admin">Somente administradores podem gerenciar contas. Deve existir pelo menos um administrador ativo.</div>
+    <p id="status-usuarios" role="status" aria-live="polite"></p>
+    <a id="retornar-login" href="../login-supabase.html?continuar=gerencial" hidden>Entrar novamente</a>
+    <div class="layout-admin">
+      <section class="painel-lista" aria-labelledby="titulo-usuarios">
+        <div class="titulo-painel"><h2 id="titulo-usuarios">Usuários cadastrados</h2></div>
+        <div id="confirmacao-exclusao" class="aviso-admin" hidden>
+          <p id="texto-confirmacao"></p>
+          <div class="acoes-item">
+            <button type="button" id="confirmar-exclusao" class="excluir">Confirmar exclusão</button>
+            <button type="button" id="cancelar-exclusao">Cancelar</button>
+          </div>
+        </div>
+        <div id="lista-usuarios"></div>
+      </section>
+      <section class="painel-formulario" aria-labelledby="titulo-usuario">
+        <div class="titulo-painel"><h2 id="titulo-usuario">Novo usuário</h2></div>
+        <form id="formulario-usuario" method="post">
+          <div class="campos-admin">
+            <div class="largura-total"><label for="email">E-mail *</label><input type="email" id="email" name="email" maxlength="254" autocomplete="off" autocapitalize="none" required><small>O e-mail identifica a conta e permanece fixo após o cadastro.</small></div>
+            <div class="largura-total"><label for="nome">Nome</label><input id="nome" name="nome" maxlength="120" autocomplete="off"></div>
+            <div><label for="perfil">Perfil *</label><select id="perfil" name="perfil" required><option value="">Selecione</option><option value="editor">Editor</option><option value="administrador">Administrador</option></select></div>
+            <div><label for="ativo">Acesso *</label><select id="ativo" name="ativo" required><option value="true">Ativo</option><option value="false">Inativo</option></select></div>
+            <div id="campos-criar-senha" class="largura-total">
+              <div class="campos-admin">
+                <div><label for="senha">Senha *</label><input id="senha" name="senha" type="password" minlength="8" maxlength="200" autocomplete="new-password" required></div>
+                <div><label for="confirmacao">Confirmar senha *</label><input id="confirmacao" name="confirmacao" type="password" minlength="8" maxlength="200" autocomplete="new-password" required></div>
+              </div>
+              <small>Use entre 8 e 200 caracteres, respeitando as regras de senha do projeto Supabase.</small>
+            </div>
+          </div>
+          <div class="acoes-formulario"><button type="submit" class="botao-principal">Salvar usuário</button><button type="button" id="cancelar-usuario">Cancelar edição</button></div>
+        </form>
+        <section id="painel-alterar-senha" class="painel-novo-tipo" aria-labelledby="titulo-alterar-senha" hidden>
+          <h3 id="titulo-alterar-senha">Alterar senha</h3>
+          <p>Esta ação altera somente a senha da conta selecionada.</p>
+          <form id="formulario-senha" method="post">
+            <div class="campos-admin">
+              <div><label for="nova-senha">Nova senha *</label><input id="nova-senha" type="password" minlength="8" maxlength="200" autocomplete="new-password" required></div>
+              <div><label for="confirmar-nova-senha">Confirmar nova senha *</label><input id="confirmar-nova-senha" type="password" minlength="8" maxlength="200" autocomplete="new-password" required></div>
+            </div>
+            <div class="acoes-formulario"><button type="submit" class="botao-principal">Alterar senha</button></div>
+          </form>
+        </section>
+      </section>
+    </div>
+  </main>
+  <footer class="rodape-institucional">
+    <div class="rodape-creditos">
+      <span class="rodape-legenda">Desenvolvido por</span>
+      <strong>CGGES — Escritório de Processos</strong>
+      <span>Secretaria do Patrimônio da União</span>
+    </div>
+
+    <p class="rodape-assinatura">
+      SPUProcessos
+    </p>
+  </footer>
+</body>
+</html>
+

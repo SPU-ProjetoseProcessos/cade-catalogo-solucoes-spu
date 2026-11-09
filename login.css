@@ -1,0 +1,540 @@
+/* Estrutura geral */
+
+.pagina-login {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+
+  font-family: "Raleway", "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+
+  color: #171c25;
+  background: #f5f5fa;
+}
+
+.pagina-login *,
+.pagina-login *::before,
+.pagina-login *::after {
+  box-sizing: border-box;
+}
+
+.pagina-login button,
+.pagina-login input {
+  font: inherit;
+}
+
+.pagina-login :focus-visible {
+  outline: 3px solid #578bff;
+  outline-offset: 3px;
+}
+
+/* Atalho de acessibilidade */
+
+.pagina-login .pular-conteudo {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  z-index: 100;
+
+  padding: 10px 16px;
+  border-radius: 8px;
+
+  color: #ffffff;
+  background: #202b8c;
+
+  transform: translateY(-200%);
+}
+
+.pagina-login .pular-conteudo:focus {
+  transform: translateY(0);
+}
+
+/* Cabeçalho */
+
+.pagina-login .cabecalho-login {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  min-height: 80px;
+  padding: 14px 36px;
+
+  background: #ffffff;
+  border-top: 1px solid #dfe3ed;
+  border-bottom: 1px solid #dfe3ed;
+}
+
+.pagina-login .marca-login {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #202b8c;
+  text-decoration: none;
+}
+
+.pagina-login .marca-login-textos {
+  display: flex;
+  flex-direction: column;
+}
+
+.pagina-login .marca-login-nome {
+  display: flex;
+  align-items: baseline;
+
+  font-size: 23px;
+  line-height: 1.2;
+}
+
+.pagina-login .marca-login-nome strong {
+  font-weight: 800;
+}
+
+.pagina-login .marca-login-nome > span {
+  font-weight: 400;
+}
+
+.pagina-login .marca-login-textos small {
+  margin-top: 2px;
+
+  color: #657080;
+  font-size: 12px;
+}
+
+.pagina-login .marca-login-grafico {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+
+  height: 26px;
+}
+
+.pagina-login .marca-login-grafico i {
+  display: block;
+  width: 4px;
+  border-radius: 1px;
+}
+
+.pagina-login .marca-login-grafico i:nth-child(1) {
+  height: 11px;
+  background: #237245;
+}
+
+.pagina-login .marca-login-grafico i:nth-child(2) {
+  height: 17px;
+  background: #202b8c;
+}
+
+.pagina-login .marca-login-grafico i:nth-child(3) {
+  height: 24px;
+  background: #e8bf32;
+}
+
+.pagina-login .marca-login-grafico i:nth-child(4) {
+  height: 16px;
+  background: #578bff;
+}
+
+.pagina-login .marca-login-grafico i:nth-child(5) {
+  height: 9px;
+  background: #202b8c;
+}
+
+.pagina-login .link-catalogo-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 42px;
+  padding: 9px 15px;
+
+  border: 1px solid #cbd1df;
+  border-radius: 9px;
+
+  color: #202b8c;
+  background: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.pagina-login .link-catalogo-login:hover {
+  background: #eef2ff;
+  border-color: #abb9e5;
+}
+
+/* Conteúdo central */
+
+.pagina-login .conteudo-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+
+  margin: 0;
+  padding: 48px 20px;
+}
+
+.pagina-login .cartao-login {
+  width: 100%;
+  max-width: 460px;
+  padding: 32px;
+
+  border: 1px solid #dfe3ed;
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 2px 3px rgb(20 30 60 / 4%),
+    0 10px 24px rgb(20 30 60 / 5%);
+}
+
+/* Apresentação */
+
+.pagina-login .abertura-login {
+  margin-bottom: 28px;
+}
+
+.pagina-login .etiqueta-login {
+  display: inline-block;
+
+  margin-bottom: 14px;
+  padding: 5px 10px;
+
+  border: 1px solid #d5def7;
+  border-radius: 20px;
+
+  color: #202b8c;
+  background: #eef2ff;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.pagina-login .abertura-login h1 {
+  margin: 0 0 10px;
+
+  color: #171c25;
+
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  line-height: 1.25;
+}
+
+.pagina-login .abertura-login p {
+  margin: 0;
+
+  color: #657080;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Formulário */
+
+.pagina-login .formulario-login {
+  display: grid;
+  gap: 20px;
+}
+
+.pagina-login .campo-login {
+  min-width: 0;
+}
+
+.pagina-login .campo-login label {
+  display: block;
+  margin-bottom: 7px;
+
+  color: #657080;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pagina-login .campo-login input {
+  display: block;
+
+  width: 100%;
+  min-height: 46px;
+  margin: 0;
+  padding: 11px 12px;
+
+  border: 1px solid #cbd1df;
+  border-radius: 9px;
+
+  color: #171c25;
+  background: #f9fafe;
+
+  font-size: 14px;
+}
+
+.pagina-login .campo-login input:hover {
+  border-color: #a5b2d0;
+}
+
+.pagina-login .campo-login input:focus {
+  background: #ffffff;
+}
+
+/* Senha e botão Mostrar/Ocultar */
+
+.pagina-login .campo-senha {
+  display: flex;
+  align-items: stretch;
+
+  border: 1px solid #cbd1df;
+  border-radius: 9px;
+
+  background: #f9fafe;
+}
+
+.pagina-login .campo-senha:hover {
+  border-color: #a5b2d0;
+}
+
+.pagina-login .campo-senha:focus-within {
+  border-color: #578bff;
+}
+
+.pagina-login .campo-senha input {
+  flex: 1;
+  min-width: 0;
+
+  border: 0;
+  border-radius: 9px 0 0 9px;
+}
+
+.pagina-login #alternar-senha {
+  flex-shrink: 0;
+
+  min-width: 82px;
+  min-height: 46px;
+  margin: 0;
+  padding: 9px 12px;
+
+  border: 0;
+  border-left: 1px solid #dfe3ed;
+  border-radius: 0 9px 9px 0;
+
+  color: #202b8c;
+  background: #eef2ff;
+
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pagina-login #alternar-senha:hover {
+  background: #e3eaff;
+}
+
+.pagina-login .campo-senha input:focus-visible,
+.pagina-login #alternar-senha:focus-visible {
+  outline-offset: -3px;
+}
+
+/* Botão de entrada */
+
+.pagina-login .botao-entrar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 46px;
+  margin: 4px 0 0;
+  padding: 11px 16px;
+
+  border: 1px solid #202b8c;
+  border-radius: 9px;
+
+  color: #ffffff;
+  background: #202b8c;
+
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pagina-login .botao-entrar:hover {
+  border-color: #15206d;
+  background: #15206d;
+}
+
+.pagina-login .link-recuperacao {
+  display: block;
+  margin: 12px auto 0;
+  padding: 6px 8px;
+  border: 0;
+  color: #202b8c;
+  background: transparent;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.pagina-login .link-recuperacao:hover {
+  text-decoration: underline;
+}
+
+/* Mensagem de erro */
+
+.pagina-login .erro-login {
+  margin: 0 0 22px;
+  padding: 13px 15px;
+
+  border: 1px solid #ecc5c2;
+  border-radius: 9px;
+
+  color: #a12622;
+  background: #fff3f2;
+
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* Orientações */
+
+.pagina-login .orientacao-login {
+  margin: 22px 0;
+
+  color: #657080;
+
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.pagina-login .retorno-login {
+  padding-top: 18px;
+  border-top: 1px solid #dfe3ed;
+}
+
+.pagina-login .retorno-login a {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 36px;
+
+  color: #202b8c;
+
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pagina-login .retorno-login a:hover {
+  text-decoration: underline;
+}
+
+/* Rodapé */
+
+.pagina-login .rodape-institucional {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  width: 100%;
+  margin-top: 0;
+  padding: 26px 36px;
+
+  border-top: 1px solid #dfe3ed;
+
+  color: #657080;
+  background: #ffffff;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.pagina-login .erro-login.sucesso-login {
+  border-color: #b8dfc5;
+  color: #176b38;
+  background: #effaf2;
+}
+
+.pagina-login .rodape-creditos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pagina-login .rodape-legenda {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.pagina-login .rodape-creditos strong {
+  color: #171c25;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.pagina-login .rodape-assinatura {
+  margin: 0;
+  font-size: 12px;
+  text-align: right;
+}
+
+/* Celular */
+
+@media (max-width: 600px) {
+  .pagina-login .cabecalho-login {
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .pagina-login .marca-login-nome {
+    font-size: 22px;
+  }
+
+  .pagina-login .marca-login-textos small {
+    font-size: 11px;
+  }
+
+  .pagina-login .link-catalogo-login {
+    min-height: 40px;
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+
+  .pagina-login .conteudo-login {
+    padding: 30px 16px;
+  }
+
+  .pagina-login .cartao-login {
+    padding: 26px 22px;
+  }
+
+  .pagina-login .abertura-login h1 {
+    font-size: 25px;
+  }
+
+  .pagina-login .rodape-institucional {
+    flex-direction: column;
+    gap: 18px;
+    padding: 24px 16px;
+  }
+
+  .pagina-login .rodape-assinatura {
+    text-align: left;
+  }
+}

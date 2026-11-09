@@ -1,0 +1,844 @@
+/* Fonte semelhante à referência */
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap");
+
+
+/* ==================================================
+   CONFIGURAÇÃO DA ÁREA ADMINISTRATIVA
+   ================================================== */
+
+.pagina-administracao {
+  --admin-azul: #202b8c;
+  --admin-azul-hover: #15206d;
+  --admin-azul-claro: #eef2ff;
+  --admin-texto: #171c25;
+  --admin-secundario: #657080;
+  --admin-borda: #dfe3ed;
+  --admin-fundo: #f5f5fa;
+
+  --admin-sombra:
+    0 2px 3px rgb(20 30 60 / 4%),
+    0 10px 24px rgb(20 30 60 / 5%);
+
+  font-family: "Raleway", "Segoe UI", Arial, sans-serif;
+  color: var(--admin-texto);
+  background-color: var(--admin-fundo);
+}
+
+.pagina-administracao [hidden] {
+  display: none !important;
+}
+
+.pagina-administracao :focus-visible {
+  outline: 3px solid #578bff;
+  outline-offset: 3px;
+}
+
+
+/* ==================================================
+   CABEÇALHO
+   ================================================== */
+
+.pagina-administracao > header {
+  min-height: 80px;
+  border-top: 1px solid var(--admin-borda);
+  border-bottom: 1px solid var(--admin-borda);
+  background-color: #ffffff;
+}
+
+.pagina-administracao .identidade {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 80px;
+  padding: 16px 36px;
+}
+
+.pagina-administracao .identidade strong {
+  padding-right: 14px;
+  border-right: 1px solid var(--admin-borda);
+  color: var(--admin-azul);
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.pagina-administracao .identidade span {
+  color: var(--admin-azul);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.pagina-administracao .identidade small {
+  color: var(--admin-secundario);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+/* ==================================================
+   CONTEÚDO PRINCIPAL
+   ================================================== */
+
+.administracao {
+  width: calc(100% - 64px);
+  max-width: 1400px;
+  min-height: 65vh;
+  margin: 30px auto 44px;
+}
+
+.apresentacao-admin {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-bottom: 20px;
+}
+
+.apresentacao-admin h2 {
+  margin: 0;
+  color: var(--admin-texto);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.7px;
+}
+
+.apresentacao-admin p {
+  margin: 9px 0 0;
+  color: var(--admin-secundario);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.administracao > .orientacao {
+  margin: 0 0 16px;
+  color: var(--admin-secundario);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+/* ==================================================
+   BOTÕES E NAVEGAÇÃO
+   ================================================== */
+
+.acoes-admin {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.administracao button,
+.administracao .botao-voltar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 44px;
+  padding: 10px 15px;
+
+  border: 1px solid #cbd1df;
+  border-radius: 9px;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+
+  color: var(--admin-azul);
+  background-color: #ffffff;
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+.administracao button:hover,
+.administracao .botao-voltar:hover {
+  border-color: #8da6ed;
+  background-color: var(--admin-azul-claro);
+}
+
+.administracao .botao-principal {
+  border-color: var(--admin-azul);
+  color: #ffffff;
+  background-color: var(--admin-azul);
+}
+
+.administracao .botao-principal:hover {
+  border-color: var(--admin-azul-hover);
+  background-color: var(--admin-azul-hover);
+}
+
+.administracao .botao-sair,
+.administracao #sair-usuarios {
+  color: var(--admin-secundario);
+}
+
+.administracao button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+
+/* ==================================================
+   AVISOS E MENSAGENS
+   ================================================== */
+
+.aviso-admin {
+  padding: 15px 18px;
+
+  border: 1px solid #d5def7;
+  border-radius: 12px;
+
+  color: #394a83;
+  background-color: #eef3ff;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.status-container {
+  margin: 16px 0 22px;
+}
+
+#status-admin,
+#status-usuarios {
+  margin: 16px 0 22px;
+  color: #394a83;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.status-container #status-admin {
+  margin: 0;
+}
+
+#status-admin.erro,
+#status-usuarios.erro {
+  color: #a12622;
+}
+
+#perfil-atual,
+#identificacao-usuario {
+  color: var(--admin-secundario);
+  font-size: 12px;
+}
+
+
+/* ==================================================
+   PAINÉIS PRINCIPAIS
+   ================================================== */
+
+.layout-admin {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 2fr);
+  align-items: start;
+  gap: 22px;
+}
+
+.painel-lista,
+.painel-formulario {
+  min-width: 0;
+  padding: 24px;
+
+  border: 1px solid var(--admin-borda);
+  border-radius: 14px;
+
+  background-color: #ffffff;
+  box-shadow: var(--admin-sombra);
+}
+
+.titulo-painel {
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #e5e8f0;
+}
+
+.identificador-painel {
+  display: block;
+  margin-bottom: 6px;
+
+  color: #737b87;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.titulo-painel h2 {
+  margin: 0;
+  color: var(--admin-texto);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+
+/* ==================================================
+   CAMPOS DOS FORMULÁRIOS
+   ================================================== */
+
+.administracao label {
+  display: block;
+  margin-bottom: 7px;
+
+  color: var(--admin-secundario);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.administracao input,
+.administracao select,
+.administracao textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 12px;
+
+  border: 1px solid #cbd1df;
+  border-radius: 9px;
+
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+
+  color: var(--admin-texto);
+  background-color: #f9fafe;
+}
+
+.administracao input:hover,
+.administracao select:hover,
+.administracao textarea:hover {
+  border-color: #a5b2d0;
+}
+
+.administracao input:focus,
+.administracao select:focus,
+.administracao textarea:focus {
+  background-color: #ffffff;
+}
+
+.administracao textarea {
+  resize: vertical;
+}
+
+.administracao input:disabled,
+.administracao select:disabled,
+.administracao textarea:disabled {
+  color: #7b8492;
+  background-color: #f0f2f7;
+  cursor: not-allowed;
+}
+
+.administracao input[readonly] {
+  color: #596773;
+  background-color: #f0f2f7;
+}
+
+.administracao small {
+  display: block;
+  margin-top: 6px;
+
+  color: var(--admin-secundario);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.campos-admin {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.campos-admin > div {
+  min-width: 0;
+}
+
+.largura-total {
+  grid-column: 1 / -1;
+}
+
+
+/* ==================================================
+   GRUPOS DE CAMPOS
+   ================================================== */
+
+#formulario-admin > .orientacao {
+  margin: 0 0 24px;
+  color: var(--admin-secundario);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.grupo-campos {
+  min-width: 0;
+  margin: 0 0 26px;
+  padding: 20px;
+
+  border: 1px solid var(--admin-borda);
+  border-radius: 12px;
+
+  background-color: #ffffff;
+}
+
+.grupo-campos legend {
+  max-width: 100%;
+  padding: 0 9px;
+
+  color: #687384;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.descricao-grupo {
+  margin: 0 0 18px;
+  color: var(--admin-secundario);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.acoes-formulario {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  padding-top: 20px;
+  border-top: 1px solid #e5e8f0;
+}
+
+
+/* ==================================================
+   PESQUISA E LISTAS
+   ================================================== */
+
+.pesquisa-admin {
+  margin-bottom: 18px;
+}
+
+#contagem-admin {
+  margin: 9px 0 0;
+  color: var(--admin-secundario);
+  font-size: 12px;
+}
+
+#lista-admin,
+#lista-usuarios {
+  display: grid;
+  gap: 12px;
+}
+
+.item-admin {
+  padding: 17px;
+
+  border: 1px solid var(--admin-borda);
+  border-radius: 12px;
+
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgb(20 30 60 / 3%);
+
+  overflow-wrap: anywhere;
+}
+
+.item-admin h3 {
+  margin: 0 0 7px;
+  color: var(--admin-texto);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.item-admin p {
+  margin: 0 0 14px;
+  color: var(--admin-secundario);
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.acoes-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.item-admin button {
+  min-height: 36px;
+  padding: 7px 12px;
+
+  border-radius: 8px;
+
+  font-size: 12px;
+}
+
+.item-admin .excluir {
+  border-color: #ebcecc;
+  color: #a12622;
+  background-color: #ffffff;
+}
+
+.item-admin .excluir:hover {
+  border-color: #dba6a2;
+  background-color: #fff2f1;
+}
+
+
+/* ==================================================
+   SELETOR E CADASTRO DE TIPOS
+   ================================================== */
+
+.seletor-tipo {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.seletor-tipo select {
+  flex: 1;
+  min-width: 0;
+}
+
+.administracao .botao-novo-tipo {
+  flex-shrink: 0;
+  padding: 9px 12px;
+
+  border: 1px solid #cbd4f2;
+  border-radius: 9px;
+
+  color: var(--admin-azul);
+  background-color: #eef2ff;
+
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.lista-links-manuais { display:grid; gap:8px; }
+.linha-manual input { flex:1; min-width:0; }
+.linha-manual .adicionar-manual { white-space:nowrap; }
+.linha-manual .remover-manual { color:#a12622; }
+
+.barra-opcoes-admin {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+}
+.barra-opcoes-admin > .seletor-tipo,
+.barra-opcoes-admin > select { flex: 1; min-width: 0; margin: 0; }
+.barra-opcoes-admin > .botao-novo-tipo { margin: 0; white-space: nowrap; }
+
+.administracao .botao-suspensao {
+  color: #765600;
+  border-color: #e6c65e;
+  background: #fff7d6;
+}
+.administracao .botao-suspensao:hover {
+  color: #604500;
+  border-color: #d5ad2c;
+  background: #ffefad;
+}
+.administracao .botao-exibir-solucao {
+  color: #27623a;
+  border-color: #a8d5b2;
+  background: #e7f5e9;
+}
+.administracao .botao-exibir-solucao:hover {
+  color: #1e512f;
+  border-color: #83c493;
+  background: #d6efdb;
+}
+
+.administracao .botao-novo-tipo:hover {
+  border-color: #91a8ed;
+  background-color: #e3eaff;
+}
+
+.administracao .botao-novo-tipo[aria-expanded="true"] {
+  border-color: var(--admin-azul);
+  color: #ffffff;
+  background-color: var(--admin-azul);
+}
+
+.painel-novo-tipo {
+  margin-top: 12px;
+  padding: 17px;
+
+  border: 1px solid #d5def7;
+  border-radius: 12px;
+
+  background-color: #f5f7ff;
+}
+
+.acoes-novo-tipo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.mensagem-novo-tipo {
+  margin: 12px 0 0;
+  color: #394a83;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.mensagem-novo-tipo:empty {
+  display: none;
+}
+
+.mensagem-novo-tipo.erro {
+  color: #a12622;
+}
+
+
+/* ==================================================
+   RODAPÉ
+   ================================================== */
+
+.pagina-administracao > footer {
+  padding: 20px 36px;
+
+  border-top: 1px solid var(--admin-borda);
+
+  color: var(--admin-secundario);
+  background-color: #ffffff;
+
+  font-size: 12px;
+}
+
+
+/* ==================================================
+   TELAS INTERMEDIÁRIAS
+   ================================================== */
+
+@media (max-width: 1100px) {
+  .apresentacao-admin {
+    flex-direction: column;
+  }
+
+  .acoes-admin {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .layout-admin {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+
+/* ==================================================
+   CELULARES
+   ================================================== */
+
+@media (max-width: 600px) {
+  .administracao {
+    width: calc(100% - 28px);
+    margin-top: 24px;
+  }
+
+  .pagina-administracao .cabecalho-gerencial {
+    padding-left: 14px;
+  }
+
+  .pagina-administracao .identidade {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .pagina-administracao .identidade strong {
+    padding-right: 12px;
+    font-size: 23px;
+  }
+
+  .pagina-administracao .identidade span {
+    font-size: 12px;
+  }
+
+  .pagina-administracao .identidade small {
+    font-size: 11px;
+  }
+
+  .apresentacao-admin h2 {
+    font-size: 24px;
+  }
+
+  .apresentacao-admin p {
+    font-size: 13px;
+  }
+
+  .acoes-admin {
+    gap: 8px;
+  }
+
+  .administracao .acoes-admin button,
+  .administracao .acoes-admin .botao-voltar {
+    min-height: 40px;
+    padding: 9px 11px;
+    font-size: 12px;
+  }
+
+  .painel-lista,
+  .painel-formulario {
+    padding: 18px;
+  }
+
+  .titulo-painel h2 {
+    font-size: 18px;
+  }
+
+  .campos-admin {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .grupo-campos {
+    padding: 15px;
+  }
+
+  .grupo-campos legend {
+    font-size: 10px;
+  }
+
+  .seletor-tipo {
+    flex-wrap: wrap;
+  }
+
+  .seletor-tipo select {
+    flex-basis: 100%;
+  }
+
+  .acoes-formulario {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .acoes-formulario button {
+    width: 100%;
+  }
+
+  .pagina-administracao > footer {
+    padding: 18px 16px;
+  }
+}
+
+/* Cabeçalho institucional da área gerencial */
+
+.pagina-administracao .cabecalho-gerencial {
+  display: flex;
+  align-items: center;
+
+  min-height: 80px;
+  padding: 14px 20px 14px max(32px, calc((100% - 1400px) / 2));
+
+  background: #ffffff;
+  border-top: 1px solid #dfe3ed;
+  border-bottom: 1px solid #dfe3ed;
+}
+
+.pagina-administracao .marca-gerencial {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  max-width: 100%;
+
+  color: #202b8c;
+  text-decoration: none;
+}
+
+.pagina-administracao .marca-gerencial-textos {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pagina-administracao .marca-gerencial-textos strong {
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.pagina-administracao .marca-gerencial-textos small {
+  margin-top: 3px;
+
+  color: #657080;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.pagina-administracao .marca-gerencial-grafico {
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+  gap: 3px;
+
+  height: 26px;
+}
+
+.pagina-administracao .marca-gerencial-grafico i {
+  display: block;
+  width: 4px;
+  border-radius: 1px;
+}
+
+.pagina-administracao .marca-gerencial-grafico i:nth-child(1) {
+  height: 11px;
+  background: #237245;
+}
+
+.pagina-administracao .marca-gerencial-grafico i:nth-child(2) {
+  height: 17px;
+  background: #202b8c;
+}
+
+.pagina-administracao .marca-gerencial-grafico i:nth-child(3) {
+  height: 24px;
+  background: #578bff;
+}
+
+.pagina-administracao .marca-gerencial-grafico i:nth-child(4) {
+  height: 16px;
+  background: #e8bf32;
+}
+
+.pagina-administracao .marca-gerencial-grafico i:nth-child(5) {
+  height: 9px;
+  background: #202b8c;
+}
+
+@media (max-width: 600px) {
+  .pagina-administracao .cabecalho-gerencial {
+    padding: 16px 20px 16px 14px;
+  }
+
+  .pagina-administracao .marca-gerencial-textos strong {
+    font-size: 19px;
+  }
+
+  .pagina-administracao .marca-gerencial-textos small {
+    font-size: 11px;
+  }
+}
+
+/* Texto vermelho no botão Sair */
+.pagina-administracao #sair-admin,
+.pagina-administracao #sair-usuarios {
+  color: #b42318;
+}
+
+.pagina-administracao #sair-admin:hover,
+.pagina-administracao #sair-usuarios:hover {
+  color: #912018;
+  background-color: #fff3f2;
+}

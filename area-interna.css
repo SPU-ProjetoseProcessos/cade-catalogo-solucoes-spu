@@ -1,0 +1,47 @@
+/* Complementos exclusivos do login e da administração.
+   O CSS e o HTML do catálogo público permanecem intactos. */
+.pagina-login,
+.pagina-administracao {
+  background: #f4f6fa;
+}
+.pular-conteudo {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 10;
+  padding: 12px;
+  background: #ffffff;
+}
+.pular-conteudo:focus {
+  top: 12px;
+}
+.pagina-login .conteudo-login {
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  margin: 0;
+}
+.pagina-login h2,
+.pagina-administracao h2 {
+  line-height: 1.3;
+}
+.pagina-administracao .orientacao {
+  color: #596773;
+  font-size: 13px;
+}
+.pagina-administracao button:disabled,
+.pagina-login button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.pagina-administracao #lista-usuarios {
+  display: grid;
+  gap: 10px;
+}
+.pagina-administracao #status-usuarios {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.pagina-administracao .acoes-admin a[hidden] {
+  display: none !important;
+}

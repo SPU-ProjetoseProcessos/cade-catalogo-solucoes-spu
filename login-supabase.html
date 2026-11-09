@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Entrar — Cadê?</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./login.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="./supabase-config.js" defer></script>
+  <script src="./supabase-cliente.js" defer></script>
+  <script src="./login-supabase.js" defer></script>
+  <link rel="icon" type="image/svg+xml" href="./icone-cade.svg">
+</head>
+
+<body class="pagina-login">
+  <a class="pular-conteudo" href="#conteudo-login">
+    Pular para o conteúdo
+  </a>
+
+  <header class="cabecalho-login">
+    <a class="marca-login" href="./index-supabase.html" aria-label="Cadê? — Catálogo de soluções digitais da SPU, página inicial">
+      <span class="marca-login-textos">
+        <span class="marca-login-nome">
+          <strong>Cadê?</strong>
+        </span>
+
+        <small>Catálogo de soluções digitais da SPU</small>
+      </span>
+
+      <span class="marca-login-grafico" aria-hidden="true">
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+      </span>
+    </a>
+
+    <nav aria-label="Navegação do login">
+      <a class="link-catalogo-login" href="./index-supabase.html">
+        Voltar ao catálogo
+      </a>
+    </nav>
+  </header>
+
+  <main id="conteudo-login" class="conteudo-login">
+    <section class="cartao-login" aria-labelledby="titulo-login">
+      <div class="abertura-login">
+        <span class="etiqueta-login">Área gerencial</span>
+
+        <h1 id="titulo-login">Acesse sua conta</h1>
+
+        <p>
+          Entre para cadastrar e atualizar as soluções do catálogo.
+        </p>
+      </div>
+
+      <p id="status-login" class="erro-login" role="status" aria-live="polite" hidden></p>
+
+      <form id="formulario-login" method="post" class="formulario-login">
+        <div class="campo-login">
+          <label for="email">E-mail</label>
+
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="username"
+            autocapitalize="none"
+            spellcheck="false"
+            maxlength="254"
+            required
+          >
+        </div>
+
+        <div class="campo-login">
+          <label for="senha">Senha</label>
+
+          <div class="campo-senha">
+            <input
+              id="senha"
+              name="senha"
+              type="password"
+              autocomplete="current-password"
+              maxlength="200"
+              required
+            >
+
+            <button
+              type="button"
+              id="alternar-senha"
+              aria-controls="senha"
+              aria-label="Mostrar senha"
+            >
+              Mostrar
+            </button>
+          </div>
+        </div>
+
+        <button id="entrar" type="submit" class="botao-entrar">
+          Entrar
+        </button>
+        <button id="solicitar-recuperacao" type="button" class="link-recuperacao">
+          Esqueci minha senha
+        </button>
+      </form>
+
+      <section id="sessao-autenticada" aria-label="Conta conectada" hidden>
+        <p id="email-autenticado" class="orientacao-login"></p>
+        <p id="perfil-autenticado" class="orientacao-login"></p>
+        <a href="./gerencial/administrar.html" class="botao-entrar" style="text-decoration:none;margin-bottom:10px">Gerenciar recursos</a>
+        <button id="sair-supabase" type="button" class="botao-entrar">Sair</button>
+      </section>
+
+      <p class="orientacao-login">
+        Para solicitar acesso ou redefinir sua senha, procure
+        o responsável pelo catálogo.
+      </p>
+
+      <div class="retorno-login">
+        <a href="./index-supabase.html">← Voltar ao catálogo</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape-institucional">
+    <div class="rodape-creditos">
+      <span class="rodape-legenda">Desenvolvido por</span>
+      <strong>CGGES — Escritório de Processos</strong>
+      <span>Secretaria do Patrimônio da União</span>
+    </div>
+
+    <p class="rodape-assinatura">
+      SPUProcessos · Catálogo de Processos de Trabalho
+    </p>
+  </footer>
+</body>
+</html>
+

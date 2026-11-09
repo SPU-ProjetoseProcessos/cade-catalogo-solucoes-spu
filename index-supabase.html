@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="Catálogo de soluções digitais da SPU."
+  >
+
+  <title>Cadê? — Catálogo de soluções digitais da SPU</title>
+
+  <!-- Fonte semelhante à referência -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="./styles.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="./supabase-config.js" defer></script>
+  <script src="./supabase-cliente.js" defer></script>
+  <script src="./app.js" defer></script>
+  <script src="./carregar-dados-supabase.js" defer></script>
+  <link rel="icon" type="image/svg+xml" href="./icone-cade.svg">
+</head>
+
+<body class="pagina-catalogo">
+  <a class="pular" href="#conteudo">
+    Pular para o conteúdo
+  </a>
+
+  <header class="cabecalho-publico">
+    <a
+      class="marca"
+      href="./index-supabase.html"
+      aria-label="Cadê? — Catálogo de soluções digitais da SPU, página inicial"
+    >
+      <div class="marca-textos">
+        <span class="marca-nome">
+          <strong>Cadê?</strong><span></span>
+        </span>
+
+        <small>Catálogo de soluções digitais da SPU</small>
+      </div>
+
+      <span class="marca-grafico" aria-hidden="true">
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+      </span>
+    </a>
+
+    <nav
+      class="navegacao-principal"
+      aria-label="Navegação principal"
+    >
+      <button type="button" id="abrir-sugestao" class="botao-sugerir-solucao">Sugerir cadastro de solução no catálogo</button>
+      <a href="./login-supabase.html?continuar=gerencial" class="botao-area-gerencial">
+        Área gerencial
+      </a>
+    </nav>
+  </header>
+  <dialog id="dialogo-sugestao" class="dialogo-sugestao">
+    <form id="formulario-sugestao">
+      <h2>Sugerir cadastro de solução no catálogo</h2>
+      <label for="texto-sugestao">Qual solução você sugere incluir?</label>
+      <textarea id="texto-sugestao" rows="5" maxlength="2000" required></textarea>
+      <div class="acoes-sugestao"><button type="submit" class="botao-area-gerencial">Enviar sugestão</button><button type="button" id="fechar-sugestao" class="botao-cancelar-sugestao">Cancelar</button></div>
+      <p id="status-sugestao" role="status" aria-live="polite"></p>
+    </form>
+  </dialog>
+
+  <main id="conteudo">
+    <p
+      id="status-dados"
+      class="aviso"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></p>
+
+    <section
+      class="bloco bloco-pesquisa"
+      aria-label="Pesquisa e filtros"
+    >
+      <div class="titulo-secao">
+        <h2>Encontre uma solução</h2>
+        <p>Pesquise por qualquer informação ou utilize os filtros.</p>
+      </div>
+
+      <form
+        id="filtros"
+        role="search"
+        aria-label="Pesquisar soluções"
+      >
+        <div>
+          <label for="busca">Busca textual</label>
+
+          <input
+            type="search"
+            id="busca"
+            autocomplete="off"
+          >
+        </div>
+
+        <div>
+          <label for="unidade">Unidade responsável</label>
+
+          <select id="unidade">
+            <option value="">Todas as unidades</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="tipo">Tipo</label>
+
+          <select id="tipo">
+            <option value="">Todos os tipos</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="acesso">Acesso</label>
+
+          <select id="acesso">
+            <option value="">Todos os acessos</option>
+            <option value="Aberto">Acesso Aberto</option>
+            <option value="Restrito">Acesso Restrito</option>
+          </select>
+        </div>
+
+        <button type="reset" class="botao-limpar">
+          Limpar filtros
+        </button>
+      </form>
+
+      <p id="resumo-filtros" hidden></p>
+    </section>
+
+<section aria-label="Resultados da pesquisa">
+      <div class="cabecalho-resultados">
+        <p
+          id="contagem"
+          role="status"
+          aria-live="polite"
+        >
+          Carregando…
+        </p>
+      </div>
+
+      <div id="resultados"></div>
+
+      <p id="vazio" class="bloco" hidden></p>
+    </section>
+
+    <noscript>
+      <p class="aviso">
+        Ative o JavaScript para pesquisar e visualizar as soluções.
+      </p>
+    </noscript>
+  </main>
+
+  <footer class="rodape-institucional">
+    <div class="rodape-creditos">
+      <span class="rodape-legenda">Desenvolvido por</span>
+      <strong>CGGES — Escritório de Processos</strong>
+      <span>Secretaria do Patrimônio da União</span>
+    </div>
+
+    <p class="rodape-assinatura">
+      SPUProcessos
+    </p>
+  </footer>
+</body>
+</html>
+

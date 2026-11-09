@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Redefinir senha — Cadê?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./login.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="./supabase-config.js" defer></script>
+  <script src="./redefinir-senha.js" defer></script>
+  <link rel="icon" type="image/svg+xml" href="./icone-cade.svg">
+</head>
+<body class="pagina-login">
+  <a class="pular-conteudo" href="#conteudo-login">Pular para o conteúdo</a>
+  <header class="cabecalho-login">
+    <a class="marca-login" href="./index.html" aria-label="Cadê? — Catálogo de soluções digitais da SPU, página inicial">
+      <span class="marca-login-textos"><span class="marca-login-nome"><strong>Cadê?</strong></span><small>Catálogo de soluções digitais da SPU</small></span>
+      <span class="marca-login-grafico" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    </a>
+    <nav aria-label="Navegação"><a class="link-catalogo-login" href="./index.html">Voltar ao catálogo</a></nav>
+  </header>
+  <main id="conteudo-login" class="conteudo-login">
+    <section class="cartao-login" aria-labelledby="titulo-login">
+      <div class="abertura-login">
+        <span class="etiqueta-login">Área gerencial</span>
+        <h1 id="titulo-login">Definir nova senha</h1>
+        <p>Use uma senha nova com pelo menos 8 caracteres.</p>
+      </div>
+      <p id="status-recuperacao" class="erro-login" role="status" aria-live="polite" hidden></p>
+      <form id="formulario-recuperacao" class="formulario-login" hidden>
+        <div class="campo-login">
+          <label for="nova-senha">Nova senha</label>
+          <input id="nova-senha" type="password" autocomplete="new-password" minlength="8" maxlength="200" required>
+        </div>
+        <div class="campo-login">
+          <label for="confirmar-senha">Confirme a nova senha</label>
+          <input id="confirmar-senha" type="password" autocomplete="new-password" minlength="8" maxlength="200" required>
+        </div>
+        <button id="salvar-senha" type="submit" class="botao-entrar">Salvar nova senha</button>
+      </form>
+      <div class="retorno-login"><a href="./login-supabase.html">← Voltar ao login</a></div>
+    </section>
+  </main>
+  <footer class="rodape-institucional">
+    <div class="rodape-creditos"><span class="rodape-legenda">Desenvolvido por</span><strong>CGGES — Escritório de Processos</strong><span>Secretaria do Patrimônio da União</span></div>
+    <p class="rodape-assinatura">SPUProcessos · Catálogo de Processos de Trabalho</p>
+  </footer>
+</body>
+</html>

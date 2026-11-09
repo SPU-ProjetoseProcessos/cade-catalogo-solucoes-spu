@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="t">
+  <title id="t">Cadê? — Catálogo de soluções digitais da SPU</title>
+  <!-- Ícone de aba/favicon do Cadê? Cinco barras, as mesmas do cabeçalho do catálogo.
+       Escritório de Processos (CGGES/SPU) — 06/11/2026. -->
+  <rect width="64" height="64" rx="12" fill="#ffffff"/>
+  <g>
+    <rect x="6.5"  y="34" width="7" height="18" rx="2" fill="#2b9b60"/>
+    <rect x="17.5" y="24" width="7" height="28" rx="2" fill="#385ac5"/>
+    <rect x="28.5" y="12" width="7" height="40" rx="2" fill="#263896"/>
+    <rect x="39.5" y="25" width="7" height="27" rx="2" fill="#d4b130"/>
+    <rect x="50.5" y="37" width="7" height="15" rx="2" fill="#263896"/>
+  </g>
+</svg>

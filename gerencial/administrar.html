@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Gerenciar soluções — Cadê?</title>
+
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../area-interna.css">
+  <link rel="stylesheet" href="./administrar.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="../supabase-config.js" defer></script>
+  <script src="../supabase-cliente.js" defer></script>
+  <script src="./api-supabase.js" defer></script>
+  <script src="./tipos.js" defer></script>
+  <script src="./acessos.js" defer></script>
+  <script src="./respostas.js" defer></script>
+  <script src="./gestao-opcoes.js" defer></script>
+  <script src="./administrar.js" defer></script>
+  <link rel="icon" type="image/svg+xml" href="../icone-cade.svg">
+</head>
+
+<body class="pagina-administracao">
+  <a class="pular-conteudo" href="#conteudo-admin">
+    Pular para o conteúdo
+  </a>
+
+  <header class="cabecalho-gerencial">
+  <a
+    class="marca-gerencial"
+    href="../index-supabase.html"
+    aria-label="Cadê? — Catálogo de soluções digitais da SPU, página inicial"
+  >
+    <span class="marca-gerencial-textos">
+      <strong>Cadê?</strong>
+      <small>Catálogo de soluções digitais da SPU</small>
+    </span>
+
+    <span class="marca-gerencial-grafico" aria-hidden="true">
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+    </span>
+  </a>
+</header>
+
+  <main id="conteudo-admin" class="administracao">
+    <section class="apresentacao-admin" aria-labelledby="titulo-admin">
+      <div>
+        <h2 id="titulo-admin">Gerenciar soluções</h2>
+        <p>Cadastre, atualize e organize as soluções disponíveis.</p>
+      </div>
+
+      <nav class="acoes-admin" aria-label="Ações administrativas">
+        <a href="../index-supabase.html" class="botao-voltar">
+          Voltar ao catálogo
+        </a>
+
+        <a href="./usuarios.html" id="gerenciar-usuarios" class="botao-voltar" hidden>
+          Gerenciar usuários
+        </a>
+
+        <button type="button" id="novo-registro" class="botao-principal">
+          Novo recurso
+        </button>
+
+        <button type="button" id="sair-admin" class="botao-sair">
+          Sair
+        </button>
+      </nav>
+    </section>
+
+    <p id="perfil-atual" class="orientacao"></p>
+
+    <section id="painel-sugestoes" class="painel-sugestoes" hidden aria-labelledby="titulo-sugestoes">
+      <h2 id="titulo-sugestoes">Sugestões de novas soluções</h2>
+      <div id="lista-sugestoes"></div>
+    </section>
+
+    <div class="aviso-admin">
+      As alterações são publicadas ao salvar o recurso.
+      Somente administradores podem excluir soluções e gerenciar opções e usuários.
+    </div>
+
+    <div class="status-container">
+      <a id="retornar-login" href="../login-supabase.html?continuar=gerencial" hidden>Entrar novamente</a>
+      <p id="status-admin" role="status" aria-live="polite">
+        Carregando registros…
+      </p>
+
+      <p id="situacao-exportacao" hidden></p>
+    </div>
+
+    <div class="layout-admin">
+      <section class="painel-lista" aria-labelledby="titulo-lista">
+        <div class="titulo-painel">
+          <div>
+            <span class="identificador-painel">CATÁLOGO</span>
+            <h2 id="titulo-lista">Recursos cadastrados</h2>
+          </div>
+        </div>
+
+        <div class="pesquisa-admin">
+          <label for="busca-admin">Localizar pelo nome</label>
+          <input type="search" id="busca-admin">
+
+          <p id="contagem-admin" role="status" aria-live="polite"></p>
+        </div>
+
+        <div id="lista-admin"></div>
+      </section>
+
+      <section class="painel-formulario" aria-labelledby="titulo-formulario">
+        <div class="titulo-painel">
+          <div>
+            <span class="identificador-painel">CADASTRO</span>
+            <h2 id="titulo-formulario">Novo recurso</h2>
+          </div>
+        </div>
+
+        <form id="formulario-admin">
+          <p class="orientacao">
+            Campos com * são obrigatórios.
+            Clique em Salvar recurso para publicar as alterações.
+          </p>
+
+          <fieldset class="grupo-campos">
+            <legend>Identificação do recurso</legend>
+
+            <div class="campos-admin">
+              <div class="largura-total">
+                <label for="nome">Nome *</label>
+                <input id="nome" name="nome" required>
+              </div>
+
+              <div class="largura-total">
+                <label for="url">Link de acesso</label>
+                <input
+                  id="url"
+                  name="url"
+                  type="url"
+                  aria-describedby="ajuda-url"
+                >
+                <small id="ajuda-url">
+                  Informe o endereço completo, começando com https:// ou http://.
+                </small>
+              </div>
+
+              <div>
+                <label for="tipo">Tipo de solução *</label>
+
+                <div class="seletor-tipo">
+                  <select id="tipo" name="tipo" required>
+                    <option value="">Selecione o tipo</option>
+                  </select>
+
+                  <button
+                    type="button"
+                    id="adicionar-tipo"
+                    class="botao-novo-tipo"
+                    aria-expanded="false"
+                    aria-controls="painel-novo-tipo"
+                    hidden
+                  >
+                    + Novo tipo
+                  </button>
+                </div>
+
+                <div id="painel-novo-tipo" class="painel-novo-tipo" hidden>
+                  <label for="nome-novo-tipo">Nome do novo tipo</label>
+
+                  <input
+                    type="text"
+                    id="nome-novo-tipo"
+                    maxlength="80"
+                    autocomplete="off"
+                  >
+
+                  <div class="acoes-novo-tipo">
+                    <button
+                      type="button"
+                      id="salvar-novo-tipo"
+                      class="botao-principal"
+                    >
+                      Adicionar
+                    </button>
+
+                    <button type="button" id="cancelar-novo-tipo">
+                      Cancelar
+                    </button>
+                  </div>
+
+                  <p
+                    id="mensagem-novo-tipo"
+                    class="mensagem-novo-tipo"
+                    role="status"
+                    aria-live="polite"
+                  ></p>
+                </div>
+              </div>
+
+              <div>
+                <label for="acesso">Acesso *</label>
+                <div class="seletor-tipo">
+                  <select id="acesso" name="acesso" required>
+                    <option value="">Selecione o acesso</option>
+                  </select>
+                  <button type="button" id="adicionar-acesso" class="botao-novo-tipo"
+                    aria-expanded="false" aria-controls="painel-novo-acesso" hidden>+ Novo acesso</button>
+                </div>
+                <div id="painel-novo-acesso" class="painel-novo-tipo" hidden>
+                  <label for="nome-novo-acesso">Nome do novo acesso</label>
+                  <input id="nome-novo-acesso" type="text" maxlength="80" autocomplete="off">
+                  <div class="acoes-novo-tipo">
+                    <button id="salvar-novo-acesso" type="button" class="botao-principal">Adicionar</button>
+                    <button id="cancelar-novo-acesso" type="button">Cancelar</button>
+                  </div>
+                  <p id="mensagem-novo-acesso" class="mensagem-novo-tipo" role="status" aria-live="polite"></p>
+                </div>
+              </div>
+
+              <div class="largura-total">
+                <label for="unidade">Unidade responsável *</label>
+                <input id="unidade" name="unidade" required>
+              </div>
+
+              <div class="largura-total">
+                <label for="siglaUnidade">Sigla da unidade</label>
+                <input id="siglaUnidade" name="siglaUnidade" aria-describedby="orientacao-sigla-unidade">
+                <small id="orientacao-sigla-unidade">
+                  Opcional. Aparece na tag do catálogo. O nome completo permanece nas informações do card.
+                </small>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="grupo-campos">
+            <legend>Informações apresentadas no catálogo</legend>
+
+            <div class="campos-admin">
+              <div class="largura-total">
+                <label for="descricao">Descrição</label>
+                <textarea
+                  id="descricao"
+                  name="descricao"
+                  rows="4"
+                ></textarea>
+              </div>
+              <div class="largura-total">
+                <label for="descricaoDetalhada">Descrição detalhada</label>
+
+                <textarea
+                  id="descricaoDetalhada"
+                  name="descricaoDetalhada"
+                  rows="5"
+                ></textarea>
+              </div>
+
+              <div class="largura-total">
+                <label for="publicoAlvo">Quem pode usar?</label>
+                <div class="seletor-tipo">
+                  <select id="publicoAlvo" name="publicoAlvo">
+                    <option value="">Não informado</option>
+                  </select>
+                  <button type="button" id="adicionar-publicoAlvo" class="botao-novo-tipo" aria-expanded="false" aria-controls="painel-publicoAlvo" hidden>+ Nova opção</button>
+                </div>
+                <div id="painel-publicoAlvo" class="painel-novo-tipo" hidden>
+                  <label for="nome-publicoAlvo">Nova opção para Quem pode usar?</label>
+                  <textarea id="nome-publicoAlvo" rows="3" maxlength="10000"></textarea>
+                  <div class="acoes-novo-tipo">
+                    <button type="button" id="salvar-publicoAlvo" class="botao-principal">Adicionar</button>
+                    <button type="button" id="cancelar-publicoAlvo">Cancelar</button>
+                  </div>
+                  <p id="mensagem-publicoAlvo" class="mensagem-novo-tipo" role="status" aria-live="polite"></p>
+                </div>
+              </div>
+
+              <div class="largura-total">
+                <label for="procedimentoAcesso">
+                  Como conseguir o acesso?
+                </label>
+                <div class="seletor-tipo">
+                  <select id="procedimentoAcesso" name="procedimentoAcesso">
+                    <option value="">Não informado</option>
+                  </select>
+                  <button type="button" id="adicionar-procedimentoAcesso" class="botao-novo-tipo" aria-expanded="false" aria-controls="painel-procedimentoAcesso" hidden>+ Nova opção</button>
+                </div>
+                <div id="painel-procedimentoAcesso" class="painel-novo-tipo" hidden>
+                  <label for="nome-procedimentoAcesso">Nova opção para Como conseguir o acesso?</label>
+                  <textarea id="nome-procedimentoAcesso" rows="3" maxlength="10000"></textarea>
+                  <div class="acoes-novo-tipo">
+                    <button type="button" id="salvar-procedimentoAcesso" class="botao-principal">Adicionar</button>
+                    <button type="button" id="cancelar-procedimentoAcesso">Cancelar</button>
+                  </div>
+                  <p id="mensagem-procedimentoAcesso" class="mensagem-novo-tipo" role="status" aria-live="polite"></p>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="grupo-campos">
+            <legend>Informações complementares e pesquisa</legend>
+
+            <p class="descricao-grupo">
+              As informações aparecem ao expandir o card e participam da pesquisa. As palavras-chave são utilizadas somente na pesquisa.
+            </p>
+
+            <div class="campos-admin">
+              <div class="largura-total">
+                <label for="manual-link-1">Manual do usuário — links ou orientações</label>
+                <div id="lista-manuais" class="lista-links-manuais">
+                  <div class="seletor-tipo linha-manual"><input id="manual-link-1" type="url" aria-label="Link do manual 1" placeholder="https://"><button type="button" class="botao-novo-tipo adicionar-manual">+ Adicionar link</button></div>
+                </div>
+                <input id="manualUsuario" name="manualUsuario" type="hidden">
+              </div>
+
+              <div class="largura-total">
+                <label for="documento-apoio-1">Documentos de apoio — links, textos ou referências</label>
+                <div id="lista-documentos-apoio" class="lista-links-manuais">
+                  <div class="seletor-tipo linha-manual"><input id="documento-apoio-1" type="text" aria-label="Documento de apoio 1" placeholder="Cole um link ou descreva o documento"><button type="button" class="botao-novo-tipo adicionar-documento-apoio">+ Nova opção</button></div>
+                </div>
+                <input id="documentosApoio" name="documentosApoio" type="hidden">
+                <small>Adicione uma opção por linha. Para anexos, informe o link do arquivo.</small>
+              </div>
+
+              <div>
+                <label for="canalSuporte">Canal de suporte</label>
+                <input id="canalSuporte" name="canalSuporte">
+              </div>
+
+              <div>
+                <label for="tipoAutenticacao">
+                  Tipo de autenticação
+                </label>
+                <input id="tipoAutenticacao" name="tipoAutenticacao">
+              </div>
+
+              <div class="largura-total">
+                <label for="orientacaoLogin">Que login e senha usar?</label>
+                <div class="seletor-tipo">
+                  <select id="orientacaoLogin" name="orientacaoLogin" aria-describedby="ajuda-login-orientacao">
+                    <option value="">Não informado</option>
+                  </select>
+                  <button type="button" id="adicionar-orientacaoLogin" class="botao-novo-tipo" aria-expanded="false" aria-controls="painel-orientacaoLogin" hidden>+ Nova opção</button>
+                </div>
+                <div id="painel-orientacaoLogin" class="painel-novo-tipo" hidden>
+                  <label for="nome-orientacaoLogin">Nova opção para Que login e senha usar?</label>
+                  <textarea id="nome-orientacaoLogin" rows="3" maxlength="10000"></textarea>
+                  <div class="acoes-novo-tipo">
+                    <button type="button" id="salvar-orientacaoLogin" class="botao-principal">Adicionar</button>
+                    <button type="button" id="cancelar-orientacaoLogin">Cancelar</button>
+                  </div>
+                  <p id="mensagem-orientacaoLogin" class="mensagem-novo-tipo" role="status" aria-live="polite"></p>
+                </div>
+                <small id="ajuda-login-orientacao">Informe a conta a utilizar, como conta institucional ou gov.br. Não registre senhas.</small>
+              </div>
+
+              <div class="largura-total">
+                <label for="quemLiberaAcesso">Quem libera o acesso?</label>
+                <div class="seletor-tipo">
+                  <select id="quemLiberaAcesso" name="quemLiberaAcesso">
+                    <option value="">Não informado</option>
+                  </select>
+                  <button type="button" id="adicionar-quemLiberaAcesso" class="botao-novo-tipo" aria-expanded="false" aria-controls="painel-quemLiberaAcesso" hidden>+ Nova opção</button>
+                </div>
+                <div id="painel-quemLiberaAcesso" class="painel-novo-tipo" hidden>
+                  <label for="nome-quemLiberaAcesso">Nova opção para Quem libera o acesso?</label>
+                  <textarea id="nome-quemLiberaAcesso" rows="3" maxlength="10000"></textarea>
+                  <div class="acoes-novo-tipo">
+                    <button type="button" id="salvar-quemLiberaAcesso" class="botao-principal">Adicionar</button>
+                    <button type="button" id="cancelar-quemLiberaAcesso">Cancelar</button>
+                  </div>
+                  <p id="mensagem-quemLiberaAcesso" class="mensagem-novo-tipo" role="status" aria-live="polite"></p>
+                </div>
+              </div>
+
+              <div class="largura-total">
+                <label for="funcionaForaRede">Funciona fora da rede?</label>
+                <div class="seletor-tipo">
+                  <select id="funcionaForaRede" name="funcionaForaRede">
+                    <option value="">Não informado</option>
+                  </select>
+                  <button type="button" id="adicionar-funcionaForaRede" class="botao-novo-tipo" aria-expanded="false" aria-controls="painel-funcionaForaRede" hidden>+ Nova opção</button>
+                </div>
+                <div id="painel-funcionaForaRede" class="painel-novo-tipo" hidden>
+                  <label for="nome-funcionaForaRede">Nova opção para Funciona fora da rede?</label>
+                  <textarea id="nome-funcionaForaRede" rows="3" maxlength="10000"></textarea>
+                  <div class="acoes-novo-tipo">
+                    <button type="button" id="salvar-funcionaForaRede" class="botao-principal">Adicionar</button>
+                    <button type="button" id="cancelar-funcionaForaRede">Cancelar</button>
+                  </div>
+                  <p id="mensagem-funcionaForaRede" class="mensagem-novo-tipo" role="status" aria-live="polite"></p>
+                </div>
+              </div>
+
+              <div class="largura-total">
+                <label for="solucoesRelacionadas">Soluções relacionadas</label>
+                <textarea id="solucoesRelacionadas" name="solucoesRelacionadas" rows="3"></textarea>
+              </div>
+
+              <div class="largura-total">
+                <label for="situacao">Situação</label>
+                <div class="seletor-tipo">
+                  <select id="situacao" name="situacao">
+                    <option value="">Não informado</option>
+                  </select>
+                  <button type="button" id="adicionar-situacao" class="botao-novo-tipo" aria-expanded="false" aria-controls="painel-situacao" hidden>+ Nova opção</button>
+                </div>
+                <div id="painel-situacao" class="painel-novo-tipo" hidden>
+                  <label for="nome-situacao">Nova opção para Situação</label>
+                  <textarea id="nome-situacao" rows="3" maxlength="10000"></textarea>
+                  <div class="acoes-novo-tipo">
+                    <button type="button" id="salvar-situacao" class="botao-principal">Adicionar</button>
+                    <button type="button" id="cancelar-situacao">Cancelar</button>
+                  </div>
+                  <p id="mensagem-situacao" class="mensagem-novo-tipo" role="status" aria-live="polite"></p>
+                </div>
+              </div>
+
+              <div class="largura-total">
+                <label for="palavrasChave">Palavras-chave</label>
+                <textarea
+                  id="palavrasChave"
+                  name="palavrasChave"
+                  rows="2"
+                  aria-describedby="ajuda-palavras"
+                ></textarea>
+
+                <small id="ajuda-palavras">
+                  Separe os termos com ponto e vírgula.
+                  Exemplo: imóvel; cadastro; patrimônio.
+                </small>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="acoes-formulario">
+            <button type="submit" class="botao-principal">
+              Salvar recurso
+            </button>
+
+            <button type="button" id="cancelar-edicao">
+              Cancelar edição
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="rodape-institucional">
+    <div class="rodape-creditos">
+      <span class="rodape-legenda">Desenvolvido por</span>
+      <strong>CGGES — Escritório de Processos</strong>
+      <span>Secretaria do Patrimônio da União</span>
+    </div>
+
+    <p class="rodape-assinatura">
+      SPUProcessos
+    </p>
+  </footer>
+</body>
+</html>
+
