@@ -341,7 +341,7 @@ formulario.addEventListener("reset", evento => {
 });
 
 const dialogoSugestao=document.querySelector("#dialogo-sugestao");
-document.querySelector("#abrir-sugestao").addEventListener("click",()=>dialogoSugestao.showModal());
+document.querySelector("#abrir-sugestao").addEventListener("click",()=>window.SPUCaixinha?window.SPUCaixinha.abrir("solicitar_registro"):dialogoSugestao.showModal());
 document.querySelector("#fechar-sugestao").addEventListener("click",()=>dialogoSugestao.close());
 document.querySelector("#formulario-sugestao").addEventListener("submit",async evento=>{
   evento.preventDefault();
