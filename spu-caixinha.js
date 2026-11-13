@@ -20,7 +20,8 @@
   Tudo cai em home.pedidos (projeto spuprocessos), pela função
   public.spu_registrar_pedido, e aparece na área da equipe, na caixa "Pedidos
   das ferramentas". É porta de uma via: quem envia não lê nada.
-  Contrato completo em LEIA-ME.md, na mesma pasta. Versão 1 — 12/11/2026.
+  Contrato completo em LEIA-ME.md, na mesma pasta. Versão 2 — 13/11/2026: a ficha se protege
+  do estilo da página hospedeira.
 */
 (function () {
   "use strict";
@@ -68,7 +69,15 @@
     ".spuc-campo textarea{min-height:120px;resize:vertical}",
     ".spuc-opcao{display:flex;gap:9px;align-items:flex-start;font-weight:500;font-size:15px;padding:7px 10px;border:1.5px solid var(--spuc-borda);border-radius:8px;cursor:pointer}",
     ".spuc-opcao:has(input:checked){border-color:var(--spuc-cor);box-shadow:inset 0 0 0 1px var(--spuc-cor);font-weight:700}",
-    ".spuc-opcao input{margin-top:3px;accent-color:var(--spuc-cor)}",
+    // A página hospedeira pode ter regras gerais para input, label e button (o Cadê? tem).
+    // Aqui a ficha se protege delas, para ficar igual em qualquer ferramenta.
+    ".spuc-opcao{width:auto;margin:0;text-align:left;color:inherit;background:none;line-height:1.4}",
+    ".spuc-opcao input{flex:none;width:16px;min-width:0;height:16px;min-height:0;margin:3px 0 0;padding:0;border-radius:50%;box-shadow:none;appearance:auto;-webkit-appearance:radio;accent-color:var(--spuc-cor)}",
+    ".spuc-opcao span{flex:1;min-width:0;text-align:left}",
+    ".spuc-campo{text-align:left;color:inherit}",
+    ".spuc-campo textarea,.spuc-campo input[type=email]{margin:0;min-height:0;box-shadow:none;line-height:1.4}",
+    ".spuc-campo textarea{min-height:120px}",
+    ".spuc-bt,.spuc-x{width:auto;min-width:0;min-height:0;margin:0;box-shadow:none;text-transform:none;letter-spacing:0;line-height:1.3}",
     ".spuc-dica{margin:0;font-size:13.5px;font-weight:400;color:var(--spuc-apagado)}",
     ".spuc-conta{align-self:flex-end}",
     ".spuc-caso{border:1.5px solid var(--spuc-borda);border-radius:8px;padding:8px 11px;font-size:14px}",
@@ -244,5 +253,5 @@
   }
 
   // montarTexto é interno: recebe o relato e o bloco já pronto, não os pares. Não é API.
-  window.SPUCaixinha = { iniciar: iniciar, abrir: abrir, versao: "1" };
+  window.SPUCaixinha = { iniciar: iniciar, abrir: abrir, versao: "2" };
 })();
