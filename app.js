@@ -2,6 +2,10 @@
 
 let recursos = [];
 const ITENS_POR_PAGINA = 10;
+const comparadorNomes = new Intl.Collator("pt-BR", {
+  sensitivity: "base",
+  numeric: true
+});
 let paginaAtual = 1;
 
 const formulario = document.querySelector("#filtros");
@@ -258,7 +262,10 @@ function atualizarResultados() {
       correspondeTipo &&
       correspondeAcesso
     );
-  });
+  }).sort((a, b) =>
+    comparadorNomes.compare(a.nome, b.nome) ||
+    String(a.id).localeCompare(String(b.id), "pt-BR")
+  );
 
   const totalPaginas = Math.max(1, Math.ceil(encontrados.length / ITENS_POR_PAGINA));
   paginaAtual = Math.min(paginaAtual, totalPaginas);
@@ -341,7 +348,7 @@ formulario.addEventListener("reset", evento => {
 });
 
 const dialogoSugestao=document.querySelector("#dialogo-sugestao");
-document.querySelector("#abrir-sugestao").addEventListener("click",()=>window.SPUCaixinha?window.SPUCaixinha.abrir("solicitar_registro"):dialogoSugestao.showModal());
+document.querySelector("#abrir-sugestao").addEventListener("click",()=>dialogoSugestao.showModal());
 document.querySelector("#fechar-sugestao").addEventListener("click",()=>dialogoSugestao.close());
 document.querySelector("#formulario-sugestao").addEventListener("submit",async evento=>{
   evento.preventDefault();
