@@ -1,5 +1,9 @@
 let sessaoAtual = null;
 let registros = [];
+const comparadorNomesAdmin = new Intl.Collator("pt-BR", {
+  sensitivity: "base",
+  numeric: true
+});
 let versaoAtual = "";
 let idEmEdicao = null;
 let formularioAlterado = false;
@@ -230,6 +234,9 @@ function renderizarLista() {
 
   const encontrados = registros.filter(registro =>
     normalizarAdmin(registro.nome).includes(termo)
+  ).sort((a, b) =>
+    comparadorNomesAdmin.compare(a.nome, b.nome) ||
+    String(a.id).localeCompare(String(b.id), "pt-BR")
   );
 
   lista.replaceChildren();
